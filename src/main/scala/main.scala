@@ -8,14 +8,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 object ILike {
   implicit class IlikeOps(s: Rep[String]) {
     def ilike(p: Rep[String]): Rep[Boolean] = {
-			val expr = SimpleExpression.binary[String,String,Boolean] { (s, p, qb) =>
-				qb.expr(s)
-				qb.sqlBuilder += " ILIKE "
-				qb.expr(p)
-			}
-			expr.apply(s,p)
-		}
-	}
+      val expr = SimpleExpression.binary[String,String,Boolean] { (s, p, qb) =>
+        qb.expr(s)
+        qb.sqlBuilder += " ILIKE "
+        qb.expr(p)
+      }
+      expr.apply(s,p)
+    }
+  }
 }
 
 object Example extends App {
@@ -44,8 +44,8 @@ object Example extends App {
   }
 
   lazy val messages = TableQuery[MessageTable]
-  
-	import ILike._
+
+  import ILike._
 
   val program = for {
     _       <- messages.schema.create
